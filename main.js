@@ -43,7 +43,11 @@ var FSHADER_SOURCE =
 
 function main() {
   // Retrieve <canvas> element
+  var width = window.innerWidth;
+  var height = window.innerHeight;
   var canvas = document.getElementById('webgl');
+  canvas.width = width;
+  canvas.height = height;
 
   // Get the rendering context for WebGL
   var gl = getWebGLContext(canvas);
@@ -58,7 +62,6 @@ function main() {
     return;
   }
 
-  //
   var n = initVertexBuffers(gl);
   if (n < 0) {
     console.log('Failed to set the vertex information');
@@ -139,12 +142,12 @@ function initVertexBuffers(gl) {
 
   // Colors
   var colors = new Float32Array([
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v1-v2-v3 front
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v3-v4-v5 right
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v5-v6-v1 up
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v1-v6-v7-v2 left
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v7-v4-v3-v2 down
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0　    // v4-v7-v6-v5 back
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0.5, 1, 0,     // v0-v1-v2-v3 front
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0.5, 1, 0,     // v0-v3-v4-v5 right
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0.5, 1, 0,     // v0-v5-v6-v1 up
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0.5, 1, 0,     // v1-v6-v7-v2 left
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0.5, 1, 0,     // v7-v4-v3-v2 down
+    0.5, 1, 0,   0.5, 1, 0,   0.5, 1, 0,  0,5, 1, 0　    // v4-v7-v6-v5 back
  ]);
 
   // Normal
