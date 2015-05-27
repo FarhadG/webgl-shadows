@@ -1,45 +1,45 @@
 // Vertex shader program
-var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'attribute vec4 a_Color;\n' +
-  'attribute vec4 a_Normal;\n' +
-  'uniform mat4 u_MvpMatrix;\n' +
-  'uniform mat4 u_ModelMatrix;\n' +    // Model matrix
-  'uniform mat4 u_NormalMatrix;\n' +   // Transformation matrix of the normal
-  'varying vec4 v_Color;\n' +
-  'varying vec3 v_Normal;\n' +
-  'varying vec3 v_Position;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_MvpMatrix * a_Position;\n' +
+var VSHADER_SOURCE = [
+  'attribute vec4 a_Position;',
+  'attribute vec4 a_Color;',
+  'attribute vec4 a_Normal;',
+  'uniform mat4 u_MvpMatrix;',
+  'uniform mat4 u_ModelMatrix;',
+  'uniform mat4 u_NormalMatrix;',
+  'varying vec4 v_Color;',
+  'varying vec3 v_Normal;',
+  'varying vec3 v_Position;',
+  'void main() {',
+    'gl_Position = u_MvpMatrix * a_Position;',
      // Calculate the vertex position in the world coordinate
-  '  v_Position = vec3(u_ModelMatrix * a_Position);\n' +
-  '  v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));\n' +
-  '  v_Color = a_Color;\n' +
-  '}\n';
+    'v_Position = vec3(u_ModelMatrix * a_Position);',
+    'v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));',
+    'v_Color = a_Color;',
+  '}'
+].join('')
 
 // Fragment shader program
-var FSHADER_SOURCE =
-  '#ifdef GL_ES\n' +
-  'precision mediump float;\n' +
-  '#endif\n' +
-  'uniform vec3 u_LightColor;\n' +     // Light color
-  'uniform vec3 u_LightPosition;\n' +  // Position of the light source
-  'uniform vec3 u_AmbientLight;\n' +   // Ambient light color
-  'varying vec3 v_Normal;\n' +
-  'varying vec3 v_Position;\n' +
-  'varying vec4 v_Color;\n' +
-  'void main() {\n' +
+var FSHADER_SOURCE = [
+  'precision mediump float;',
+  'uniform vec3 u_LightColor;',
+  'uniform vec3 u_LightPosition;',
+  'uniform vec3 u_AmbientLight;',
+  'varying vec3 v_Normal;',
+  'varying vec3 v_Position;',
+  'varying vec4 v_Color;',
+  'void main() {',
      // Normalize the normal because it is interpolated and not 1.0 in length any more
-  '  vec3 normal = normalize(v_Normal);\n' +
+    'vec3 normal = normalize(v_Normal);',
      // Calculate the light direction and make its length 1.
-  '  vec3 lightDirection = normalize(u_LightPosition - v_Position);\n' +
+    'vec3 lightDirection = normalize(u_LightPosition - v_Position);',
      // The dot product of the light direction and the orientation of a surface (the normal)
-  '  float nDotL = max(dot(lightDirection, normal), 0.0);\n' +
+    'float nDotL = max(dot(lightDirection, normal), 0.0);',
      // Calculate the final color from diffuse reflection and ambient reflection
-  '  vec3 diffuse = u_LightColor * v_Color.rgb * nDotL;\n' +
-  '  vec3 ambient = u_AmbientLight * v_Color.rgb;\n' +
-  '  gl_FragColor = vec4(diffuse + ambient, v_Color.a);\n' +
-  '}\n';
+    'vec3 diffuse = u_LightColor * v_Color.rgb * nDotL;',
+    'vec3 ambient = u_AmbientLight * v_Color.rgb;',
+    'gl_FragColor = vec4(diffuse + ambient, v_Color.a);',
+  '}'
+].join('');
 
 function main() {
   // Retrieve <canvas> element
