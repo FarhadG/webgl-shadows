@@ -189,7 +189,6 @@ function initVertexBuffersForSphere(gl) {
             vertices.push(ci * sj);
         }
     }
-
     for(j = 0; j < SPHERE_DIV; j++) {
         for(i = 0; i < SPHERE_DIV; i++) {
             p1 = j * (SPHERE_DIV+1) + i;
@@ -232,7 +231,6 @@ function initElementArrayBufferForLaterUse(gl, indices, type) {
 
 function initFramebufferObject(gl) {
     var texture, depthBuffer;
-
     var framebuffer = gl.createFramebuffer();
 
     texture = gl.createTexture();
